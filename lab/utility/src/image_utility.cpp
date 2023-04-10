@@ -1,11 +1,6 @@
-#include <iostream>
-
-
-
 #include "image_utility.h"
 
 using namespace std;
-
 
 cv::Size  show_image(const cv::Mat image, const char* title){
     return show_image2(image, title, 100, -1);
@@ -132,6 +127,66 @@ bool bilevel_image(const cv::Mat image, int threshold, cv::Mat *newImage){
     return true;
 }
 
+Status print_1d_array(string title, int* arr, int length){
+    printf("%s\n", title.c_str());
+    for(int i = 0; i< length; i++){
+        printf("arr[%d] = %d\n", i, arr[i]);
+    }
+
+    return Status(true, "ok");
+}
+
+bool get_h_sym_2d(const cv::Mat &image, const char* out_csv_filename){
+    int height = image.rows;
+    int width = image.cols;
+    bool bOk = false;
+
+    int* ret_arr_sym = new int[width];
+    memset((int*) ret_arr_sym, 0, width);
+
+    for(int y = 0; y < height; y ++)
+        get_h_sym_1d(image, y, ret_arr_sym);
+    delete[] ret_arr_sym;
+
+    return true;
+}
+
+// calcuate the sym value
+/* Usage:
+   int[] ret_arr_sym = new int[width];
+   get_h_sym_1d(image, y, ret_arr_sym)
+   delete[] ret_arr_sym;
+*/
+bool get_h_sym_1d(const cv::Mat &image, int y, int* ret_arr_sym){
+    int height = image.rows;
+    int width = image.cols;
+
+    if (width < 3){
+        printf("Warning: the image width < 3\n");
+        ret_arr_sym[0] = 65535;
+        return false;
+    }
+
+
+    for(int x = 0; x < width; x++){
+        if (x == 0 || x == width -1){
+            ret_arr_sym[x] = 65535;
+            continue;
+        }
+
+        int dleft = abs(x);
+        int dright = abs(width - x -1);
+        int dmin = (dleft < dright) ? dleft: dright;
+
+        for(int d=1; d<dmin; d++){
+            int left = (unsigned int) image.at<uchar>(y, x-d);
+            int right = (unsigned int) image.at<uchar>(y, x+d); 
+            ret_arr_sym[x] += abs(left - right);  // if left and right are simuilar, the value will be small;
+        }
+    }
+
+    return true;
+}
 
 /*
 Vertical Projection

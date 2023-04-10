@@ -1,4 +1,4 @@
-# lab-ip-cpp
+# Lab
 ## setup env
 ```
 bash ./01-env-setup.sh
