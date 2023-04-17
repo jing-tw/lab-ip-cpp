@@ -4,7 +4,7 @@
 #include <opencv2/highgui/highgui.hpp>
 
 
-#include "image_utility.h"
+#include "image_util.h"
 
 using namespace std;
 using namespace cv;

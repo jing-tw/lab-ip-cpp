@@ -1,4 +1,5 @@
-#include "image_utility.h"
+#include "image_util.h"
+//#include "test_util.h"
 
 using namespace std;
 
@@ -127,13 +128,13 @@ bool bilevel_image(const cv::Mat image, int threshold, cv::Mat *newImage){
     return true;
 }
 
-Status print_1d_array(string title, int* arr, int length){
-    printf("%s\n", title.c_str());
+void print_1d_array(const char* title, int* arr, int length, Status &status){
+    printf("%s\n", title);
     for(int i = 0; i< length; i++){
         printf("arr[%d] = %d\n", i, arr[i]);
     }
 
-    return Status(true, "ok");
+    status.update(true, "ok");
 }
 
 bool get_h_sym_2d(const cv::Mat &image, const char* out_csv_filename){

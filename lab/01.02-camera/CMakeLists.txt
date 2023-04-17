@@ -15,7 +15,7 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 # Source files
 file(GLOB SRC_FILES ${SRC_DIR}/main.cpp 
-                    ${UTIL_SRC_DIR}/image_util.cpp
+                    ${UTIL_SRC_DIR}/image_utility.cpp
                     ${UTIL_SRC_DIR}/test_util.cpp
                     )
 
