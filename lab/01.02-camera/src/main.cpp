@@ -29,10 +29,11 @@ int main() {
 void test_camera(Status &status) {
     VideoCapture cap;
 
-    cap.open(0);
+    //cap.open(0); // RGB camera
+    cap.open(2); // IR camera
     if (!cap.isOpened()) {
         status.bPass = false;
-        status.msg = "Cannot open camera";
+        status.msg = "[Error] Cannot open camera";
         return;
     }
     
@@ -40,11 +41,11 @@ void test_camera(Status &status) {
     Mat gray;
     
     bool ret=false;
-    for(int i=0; i<30; i++) {
+    for(int i=0; i<3000; i++) {
         ret = cap.read(frame); // or cap >> frame;
         if (!ret) {
             status.bPass = false;
-            status.msg = "Can't receive frame (stream end?). Exiting ...";
+            status.msg = "[Error] Can't receive frame (stream end?). Exiting ...";
             return;
         }
         imshow("live", frame);
