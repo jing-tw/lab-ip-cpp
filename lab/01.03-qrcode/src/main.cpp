@@ -53,7 +53,38 @@ void test_camera(Status &status) {
 
     // initial qr code decoder
     cv::QRCodeDetector qrDecoder;
+    char* strName = "../res/qrcode-76.png"; "../res/qrcode-multi.png";  // "../res/qrcode-76.png"
+    cv::Mat image2 = cv::imread(strName);
+    if (image2.empty() == true) {
+        std::cout << "image2 empty"<< std::endl;
+        return ;
+    }   
+        
+    cv::imshow(strName, image2);
+    // cv::waitKey(0);
 
+
+    // QR code processing
+        Mat inputImage = image2;
+        Mat bbox, rectifiedImage;
+ 
+        std::string data = qrDecoder.detectAndDecode(inputImage, bbox, rectifiedImage);
+        if(data.length()>0)
+        {
+            cout << "Decoded Data : " << data << endl;
+        
+            display(inputImage, bbox);
+            rectifiedImage.convertTo(rectifiedImage, CV_8UC3);
+            imshow("Rectified QRCode", rectifiedImage);
+        
+            waitKey(0);
+        }
+        else
+        {
+            cout << "QR Code not detected" << endl;
+        }
+    
+    cv::waitKey(0);
     bool ret=false;
     for(int i=0; i<3000; i++) {
         ret = cap.read(frame); // or cap >> frame;
