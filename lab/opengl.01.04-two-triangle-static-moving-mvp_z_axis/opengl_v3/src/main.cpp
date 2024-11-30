@@ -95,6 +95,10 @@ int main()
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
+    // define near and far for perspective view
+    float near = 1.0f;
+    float far = 10.f;
+
     // Set up vertex data and buffers for two triangles
     float staticTriangleVertices[] = {
         -0.8f, -0.8f, 0.0f,
@@ -103,10 +107,11 @@ int main()
     };
     
     float dx = 0.3;
+    float z = -2.0f;   // the value between near and far (-1.0 ~ -10.0)
     float movingTriangleVertices[] = {
-        -0.3f + dx, -0.3f, -0.5f,
-         0.3f + dx, -0.3f, -0.5f,
-         0.0f + dx,  0.3f, -0.5f 
+        -0.3f + dx, -0.3f, z,
+         0.3f + dx, -0.3f, z,
+         0.0f + dx,  0.3f, z 
     };
 
     unsigned int VBOs[2], VAOs[2];
@@ -168,30 +173,23 @@ int main()
        glBindVertexArray(VAOs[0]);
        glDrawArrays(GL_TRIANGLES , 0 , 3);
 
-
        glm::mat4 model = glm::mat4(1.0f);
+
+       // Translate: by change the view matrix
        // glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(offsetX, 0.0f, 0.0f)); // moving in x
        // glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, offsetX, 0.0f));  // Moving in y
        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, offsetX));  // Moving in z
-       glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 10.0f);
+       
+       // Rotation
+       // glm::mat4 view = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(1.0f, 0.0f, 0.0f)); // Rotate around x-axis
+       // glm::mat4 view = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotate around y-axis
+       // glm::mat4 view = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(0.0f, 0.0f, 1.0f)); // Rotate around z-axis
+
+       glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, near, far);
        glm::mat4 mvpMatrix = projection * view * model;
 
        glm::mat4 mvpMoving = mvpMatrix;
-       printf("%f\n", offsetX);
-       // Use shader program for moving triangle
-       // Translate MVP for moving triangle
-       // Translate
-       // glm::mat4 mvpMoving = glm::mat4(1.0f); // Identity matrix for static triangle MVP
-       // glm::mat4 mvpMoving = glm::translate(glm::mat4(1.0f), glm::vec3(offsetX , 0.0f ,  0.0f));  // Moving in x
-       // glm::mat4 mvpMoving = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, offsetX,  0.0f));  // Moving in y
-       // glm::mat4 mvpMoving = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, offsetX));  // Moving in z
-       
-
-       // Rotation
-       // glm::mat4 mvpMoving = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(1.0f, 0.0f, 0.0f)); // Rotate around x-axis
-       // glm::mat4 mvpMoving = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotate around y-axis
-       // glm::mat4 mvpMoving = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(0.0f, 0.0f, 1.0f)); // Rotate around z-axis
-       
+       printf("offset = %f\n", offsetX);
        glUniformMatrix4fv(glGetUniformLocation(shaderProgram , "uMVPMatrix") , 1 , GL_FALSE , glm::value_ptr(mvpMoving));
 
        // Draw moving triangle
