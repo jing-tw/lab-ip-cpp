@@ -41,7 +41,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Create a window
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Two Triangles", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Two Triangles. Press [Left] & [Right] keys.", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -104,9 +104,9 @@ int main()
     
     float dx = 0.3;
     float movingTriangleVertices[] = {
-        -0.3f + dx, -0.3f, 0.0f,
-         0.3f + dx, -0.3f, 0.0f,
-         0.0f + dx,  0.3f, 0.0f 
+        -0.3f + dx, -0.3f, -0.5f,
+         0.3f + dx, -0.3f, -0.5f,
+         0.0f + dx,  0.3f, -0.5f 
     };
 
     unsigned int VBOs[2], VAOs[2];
