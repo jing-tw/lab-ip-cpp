@@ -173,24 +173,25 @@ int main()
        glBindVertexArray(VAOs[0]);
        glDrawArrays(GL_TRIANGLES , 0 , 3);
 
-       glm::mat4 model = glm::mat4(1.0f);
+       // glm::mat4 model = glm::mat4(1.0f);
 
-       // Translate: by change the view matrix
-       // glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(offsetX, 0.0f, 0.0f)); // moving in x
-       // glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, offsetX, 0.0f));  // Moving in y
-       glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, offsetX));  // Moving in z
+       // Translate: by change the model matrix
+       // glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(offsetX, 0.0f, 0.0f)); // moving in x
+       // glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, offsetX, 0.0f));  // Moving in y
+       glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, offsetX));  // Moving in z
        
        // Rotation
-       // glm::mat4 view = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(1.0f, 0.0f, 0.0f)); // Rotate around x-axis
-       // glm::mat4 view = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotate around y-axis
-       // glm::mat4 view = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(0.0f, 0.0f, 1.0f)); // Rotate around z-axis
+       // glm::mat4 model = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(1.0f, 0.0f, 0.0f)); // Rotate around x-axis
+       // glm::mat4 model = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotate around y-axis
+       // glm::mat4 model = glm::rotate(glm::mat4(1.0f), offsetX, glm::vec3(0.0f, 0.0f, 1.0f)); // Rotate around z-axis
+
+       glm::mat4 view = glm::mat4(1.0f);
 
        glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, near, far);
        glm::mat4 mvpMatrix = projection * view * model;
 
-       glm::mat4 mvpMoving = mvpMatrix;
        printf("offset = %f\n", offsetX);
-       glUniformMatrix4fv(glGetUniformLocation(shaderProgram , "uMVPMatrix") , 1 , GL_FALSE , glm::value_ptr(mvpMoving));
+       glUniformMatrix4fv(glGetUniformLocation(shaderProgram , "uMVPMatrix") , 1 , GL_FALSE , glm::value_ptr(mvpMatrix));
 
        // Draw moving triangle
        glBindVertexArray(VAOs[1]);
