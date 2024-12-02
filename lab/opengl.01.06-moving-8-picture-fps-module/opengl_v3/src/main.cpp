@@ -14,7 +14,8 @@
 void processInput(GLFWwindow *window);
 
 GLuint loadTexture(const char* path, int& width, int& height) {
-    //  因為圖檔資料是從上往下放資料, 所以需要做轉換, 以配合 OpenGL Texture 的座標系統
+    // By default, PNG images are written as the first row of pixel data corresponds to the topmost part of the image.
+    // However, OpenGL coordinate system for texture is bottom-to-top. This is reason why we do vertically flop operator to the image
     stbi_set_flip_vertically_on_load(true);
     unsigned char* data = stbi_load(path, &width, &height, 0, 4); // require RGBA: 4
     if (!data) {
@@ -33,7 +34,7 @@ GLuint loadTexture(const char* path, int& width, int& height) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    stbi_image_free(data); // 释放内存
+    stbi_image_free(data); // free data
     return texture;
 }
 
@@ -96,7 +97,6 @@ int main() {
     }
     
     unsigned int num = 8;
-    // unsigned int VBOs[2], VAOs[2];
     unsigned int *VBOs = new unsigned int[num];
     unsigned int *VAOs = new unsigned int[num];
     unsigned int i = 0;
@@ -104,16 +104,15 @@ int main() {
     // create VAO, VBO from vertices
     float d = 0.1f;
     for (int i = 0; i < num; i++){
-        // float d = 0.2f;
-        d = d + 0.1f;
+        // d = d + 0.1f;
         float vertices[] = { // Format: positions, texture coords
             d,  d,      1.0f, 1.0f,   // top right
             d, -d,      1.0f, 0.0f,   // bottom right
-            -d, -d,      0.0f, 0.0f,   // bottom left
+            -d, -d,      0.0f, 0.0f,  // bottom left
 
             d,  d,      1.0f, 1.0f,   // top right
-            -d, -d,      0.0f, 0.0f,   // bottom left
-            -d,  d,      0.0f, 1.0f    // top left 
+            -d, -d,      0.0f, 0.0f,  // bottom left
+            -d,  d,      0.0f, 1.0f   // top left 
             };
         CreateVertices(vertices, sizeof(vertices), &VAOs[i], &VBOs[i]);
     }
@@ -140,23 +139,23 @@ int main() {
        }
    )";
 
-   // 编译顶点着色器
+   // compile the vertex shader
    unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
    glShaderSource(vertexShader , 1 , &vertexShaderSource , NULL);
    glCompileShader(vertexShader);
 
-   // Compile the shader
+   // compile the fragment shader
    unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
    glShaderSource(fragmentShader , 1 , &fragmentShaderSource , NULL);
    glCompileShader(fragmentShader);
 
-   // 创建着色器程序并链接
+   // Create a shader program
    unsigned int shaderProgram = glCreateProgram();
    glAttachShader(shaderProgram , vertexShader);
    glAttachShader(shaderProgram , fragmentShader);
    glLinkProgram(shaderProgram);
 
-   // 删除着色器，因为它们已经链接到程序中
+   // delete the shaders because they are already binded to the procedure
    glDeleteShader(vertexShader);
    glDeleteShader(fragmentShader);
 
@@ -176,7 +175,7 @@ int main() {
 
        glClear(GL_COLOR_BUFFER_BIT);
 
-       // 使用着色器程序并绑定纹理
+       // use the shader program
        glUseProgram(shaderProgram);
 
        // postion
@@ -244,7 +243,7 @@ int main() {
         }
    }
 
-   // 清理资源
+   // free resource
    glDeleteVertexArrays(num , VAOs);
    glDeleteBuffers(num , VBOs);
 
