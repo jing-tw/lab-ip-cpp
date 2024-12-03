@@ -38,7 +38,7 @@ GLuint loadTexture(const char* path, int& width, int& height) {
     return texture;
 }
 
-int CreateVertices(float *vertices, unsigned int size, unsigned int *VAO, unsigned int *VBO) {
+bool CreateVertices(float *vertices, unsigned int size, unsigned int *VAO, unsigned int *VBO) {
     glGenVertexArrays(1, VAO);
     glGenBuffers(1, VBO);
     glBindVertexArray(*VAO);
@@ -47,19 +47,21 @@ int CreateVertices(float *vertices, unsigned int size, unsigned int *VAO, unsign
     glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 
     // 1st attribute: vertices
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
     // 2st attribute: texture
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
     // Unbind the VAO 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+
+    return true;
 }
 
-int Draw(unsigned int VAO, float x, float y, float z, GLuint texture, unsigned int shaderProgram){
+bool Draw(unsigned int VAO, float x, float y, float z, GLuint texture, unsigned int shaderProgram){
     // adjuest shader for moving
     glm::mat4 mvpMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(x , y , z)); // Translate MVP for moving triangle
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram , "uMVPMatrix") , 1 , GL_FALSE , glm::value_ptr(mvpMatrix));
@@ -68,7 +70,54 @@ int Draw(unsigned int VAO, float x, float y, float z, GLuint texture, unsigned i
     glBindTexture(GL_TEXTURE_2D , texture);  // draw texture
     glBindVertexArray(VAO); // draw vertex
     glDrawArrays(GL_TRIANGLES , 0 ,6); // draw
+
+    return true;
 }
+
+// unsigned int shaderProgram = glCreateProgram();
+bool InitShader(unsigned int shaderProgram){
+    const char* vertexShaderSource = R"(
+        #version 330 core
+        layout(location = 0) in vec3 aPos;
+        layout(location = 1) in vec2 aTexCoord;
+        uniform mat4 uMVPMatrix; // MVP matrix
+        out vec2 TexCoord;
+        void main() {
+            gl_Position = uMVPMatrix * vec4(aPos.x, aPos.y, aPos.z, 1.0);
+            TexCoord = aTexCoord;
+        }
+    )";
+
+   const char* fragmentShaderSource = R"(
+       #version 330 core
+       out vec4 FragColor;
+       in vec2 TexCoord;
+       uniform sampler2D texture1;
+       void main() {
+           FragColor = texture(texture1 , TexCoord);
+       }
+   )";
+
+   // compile the vertex shader
+   unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+   glShaderSource(vertexShader , 1 , &vertexShaderSource , NULL);
+   glCompileShader(vertexShader);
+
+   // compile the fragment shader
+   unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+   glShaderSource(fragmentShader , 1 , &fragmentShaderSource , NULL);
+   glCompileShader(fragmentShader);
+
+   // Create a shader program
+   // unsigned int shaderProgram = glCreateProgram();
+   glAttachShader(shaderProgram , vertexShader);
+   glAttachShader(shaderProgram , fragmentShader);
+   glLinkProgram(shaderProgram);
+
+   // delete the shaders because they are already binded to the procedure
+   glDeleteShader(vertexShader);
+   glDeleteShader(fragmentShader);
+} 
 
 int main() {
     // init GLFW
@@ -96,68 +145,30 @@ int main() {
         return -1;
     }
     
-    unsigned int num = 8;
+    unsigned int num = 9;
     unsigned int *VBOs = new unsigned int[num];
     unsigned int *VAOs = new unsigned int[num];
     unsigned int i = 0;
 
+    unsigned int shaderProgram = glCreateProgram();
+    InitShader(shaderProgram);
+
     // create VAO, VBO from vertices
-    float d = 0.1f;
+    float d = 0.5f;
+    float z = 0.5f;
     for (int i = 0; i < num; i++){
         // d = d + 0.1f;
         float vertices[] = { // Format: positions, texture coords
-            d,  d,      1.0f, 1.0f,   // top right
-            d, -d,      1.0f, 0.0f,   // bottom right
-            -d, -d,      0.0f, 0.0f,  // bottom left
+            d,  d, z,     1.0f, 1.0f,   // top right
+            d, -d, z,     1.0f, 0.0f,   // bottom right
+            -d, -d, z,     0.0f, 0.0f,  // bottom left
 
-            d,  d,      1.0f, 1.0f,   // top right
-            -d, -d,      0.0f, 0.0f,  // bottom left
-            -d,  d,      0.0f, 1.0f   // top left 
+            d,  d, z,     1.0f, 1.0f,   // top right
+            -d, -d, z,     0.0f, 0.0f,  // bottom left
+            -d,  d, z,     0.0f, 1.0f   // top left 
             };
         CreateVertices(vertices, sizeof(vertices), &VAOs[i], &VBOs[i]);
     }
-
-    const char* vertexShaderSource = R"(
-        #version 330 core
-        layout(location = 0) in vec2 aPos;
-        layout(location = 1) in vec2 aTexCoord;
-        uniform mat4 uMVPMatrix; // MVP matrix
-        out vec2 TexCoord;
-        void main() {
-            gl_Position = uMVPMatrix * vec4(aPos.x, aPos.y, 0.0, 1.0);
-            TexCoord = aTexCoord;
-        }
-    )";
-
-   const char* fragmentShaderSource = R"(
-       #version 330 core
-       out vec4 FragColor;
-       in vec2 TexCoord;
-       uniform sampler2D texture1;
-       void main() {
-           FragColor = texture(texture1 , TexCoord);
-       }
-   )";
-
-   // compile the vertex shader
-   unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-   glShaderSource(vertexShader , 1 , &vertexShaderSource , NULL);
-   glCompileShader(vertexShader);
-
-   // compile the fragment shader
-   unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-   glShaderSource(fragmentShader , 1 , &fragmentShaderSource , NULL);
-   glCompileShader(fragmentShader);
-
-   // Create a shader program
-   unsigned int shaderProgram = glCreateProgram();
-   glAttachShader(shaderProgram , vertexShader);
-   glAttachShader(shaderProgram , fragmentShader);
-   glLinkProgram(shaderProgram);
-
-   // delete the shaders because they are already binded to the procedure
-   glDeleteShader(vertexShader);
-   glDeleteShader(fragmentShader);
 
     // Variables for FPS calculation
     double lastTime = glfwGetTime();
@@ -220,11 +231,16 @@ int main() {
             case 7:
                 Draw(VAOs[i], offsetX , -offsetX , 0.0f, texture, shaderProgram);
                 break;
+            case 8:
+                Draw(VAOs[i], 0.0f, 0.0f, offsetX, texture, shaderProgram);
+                break;
             default:
-                Draw(VAOs[i], offsetX , 0.0f , 0.0f, texture, shaderProgram);
+                Draw(VAOs[i], 0.0f , 0.0f , 0.0f, texture, shaderProgram);
                 break;
             }
        }
+
+       Draw(VAOs[0], 0.0f, 0.0f, 0.0f, texture, shaderProgram);
 
        glfwSwapBuffers(window);
        glfwPollEvents();

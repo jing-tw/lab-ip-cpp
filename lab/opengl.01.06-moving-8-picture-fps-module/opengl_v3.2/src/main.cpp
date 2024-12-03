@@ -46,11 +46,11 @@ bool CreateVertices(float *vertices, unsigned int size, unsigned int *VAO, unsig
     glBindBuffer(GL_ARRAY_BUFFER, *VBO);
     glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 
-    // 1st triangle
+    // 1st attribute: vertex
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    // 2st triangle
+    // 2st attribute: texture
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
 

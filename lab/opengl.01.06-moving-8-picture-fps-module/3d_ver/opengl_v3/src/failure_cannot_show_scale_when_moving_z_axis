@@ -1,0 +1,196 @@
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h" // for load image utility
+#include <iostream>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+GLuint loadTexture(const char* path, int& width, int& height) {
+    stbi_set_flip_vertically_on_load(true);
+    unsigned char* data = stbi_load(path, &width, &height, 0, 4);
+    if (!data) {
+        std::cerr << "Failed to load texture: " << path << std::endl;
+        return 0;
+    }
+
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    stbi_image_free(data);
+    return texture;
+}
+
+int main() {
+    if (!glfwInit()) {
+        std::cerr << "Failed to initialize GLFW" << std::endl;
+        return -1;
+    }
+    
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Display PNG", NULL, NULL);
+    if (!window) {
+        std::cerr << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    
+    glfwMakeContextCurrent(window);
+    
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cerr << "Failed to initialize GLAD" << std::endl;
+        return -1;
+    }
+
+    float z = 0.1f; // Initial z position
+    float vertices[] = {
+        // positions                     // texture coords
+         0.5f,  0.5f, z,     1.0f, 1.0f,
+         0.5f, -0.5f, z,     1.0f, 0.0f,
+        -0.5f, -0.5f, z,     0.0f, 0.0f,
+         0.5f,  0.5f, z,     1.0f, 1.0f,
+        -0.5f, -0.5f, z,     0.0f, 0.0f,
+        -0.5f,  0.5f, z,     0.0f, 1.0f 
+     };
+
+    unsigned int VBO, VAO;
+    glGenVertexArrays(1 , &VAO);
+    glGenBuffers(1 , &VBO);
+
+    glBindVertexArray(VAO);
+    
+    glBindBuffer(GL_ARRAY_BUFFER , VBO);
+    glBufferData(GL_ARRAY_BUFFER , sizeof(vertices) , vertices , GL_STATIC_DRAW);
+
+    // the first attribute: vertices
+    glVertexAttribPointer(0 , 3 , GL_FLOAT , GL_FALSE , 5 * sizeof(float) , (void*)0);
+    glEnableVertexAttribArray(0);
+
+    // second attribute: texture coords
+    glVertexAttribPointer(1 , 2 , GL_FLOAT , GL_FALSE , 5 * sizeof(float) , (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+    glBindBuffer(GL_ARRAY_BUFFER , 0);
+    glBindVertexArray(0);
+
+   const char* vertexShaderSource = R"(
+       #version 330 core
+       layout(location = 0) in vec3 aPos;
+       layout(location = 1) in vec2 aTexCoord;
+
+       out vec2 TexCoord;
+
+       uniform mat4 uMVPMatrix; // MVP matrix
+
+       void main() {
+           gl_Position = uMVPMatrix * vec4(aPos.x,aPos.y,aPos.z ,1.0); // Use MVP matrix for positioning
+           TexCoord = aTexCoord;
+       }
+   )";
+
+   const char* fragmentShaderSource = R"(
+       #version 330 core
+       out vec4 FragColor;
+
+       in vec2 TexCoord;
+
+       uniform sampler2D texture1;
+
+       void main() {
+           // FragColor = texture(texture1 , TexCoord);
+           FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f); // Orange color
+       }
+   )";
+
+   unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+   glShaderSource(vertexShader , 1 , &vertexShaderSource , NULL);
+   glCompileShader(vertexShader);
+
+   unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+   glShaderSource(fragmentShader , 1 , &fragmentShaderSource , NULL);
+   glCompileShader(fragmentShader);
+
+   unsigned int shaderProgram = glCreateProgram();
+   glAttachShader(shaderProgram , vertexShader);
+   glAttachShader(shaderProgram , fragmentShader);
+   glLinkProgram(shaderProgram);
+
+   glDeleteShader(vertexShader);
+   glDeleteShader(fragmentShader);
+
+   int width = 0 , height = 0; 
+   GLuint texture = loadTexture("cs-black-000.png", width,height); // Change to your PNG path
+
+   z = -1.0f;
+   bool bUP = false;
+   float scaleFactor = 1.0f;
+
+   while (!glfwWindowShouldClose(window)) {
+       if (z <= 0.0f && bUP == false){
+            bUP = true;
+       }
+
+        if(z > 1.0f && bUP == true){
+            bUP = false;
+        }
+
+        if(bUP){
+            z += 0.01f;
+        }else{
+            z -= 0.01f;
+        }
+
+       
+
+       // 清屏
+       glClear(GL_COLOR_BUFFER_BIT);
+
+       // 使用着色器程序和绑定纹理
+       glUseProgram(shaderProgram);
+       glBindTexture(GL_TEXTURE_2D , texture);
+
+       // Update the MVP matrix based on the z position
+       printf("z = %f\n", z);
+       // glm::mat4 mvpMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(scaleFactor, scaleFactor, 1.0f)); // 添加縮放
+       glm::mat4 mvpMatrix = glm::translate(mvpMatrix, glm::vec3(0.0f, 0.0f, z));
+
+       glUniformMatrix4fv(glGetUniformLocation(shaderProgram ,"uMVPMatrix") ,
+                          1 ,
+                          GL_FALSE ,
+                          glm::value_ptr(mvpMatrix));
+
+       // Draw the rectangle
+       glBindVertexArray(VAO);
+       glDrawArrays(GL_TRIANGLES , 0 ,6); 
+
+       glfwSwapBuffers(window);
+       glfwPollEvents();
+       
+       // Update z position for demonstration (you can adjust this logic)
+       // z += (z < -2.0 ? -0.01 : (z > -1.5 ? +0.01 : -z)); // Move back and forth along the z-axis
+   }
+
+   // 清理资源
+   glDeleteVertexArrays(1 , &VAO);
+   glDeleteBuffers(1 , &VBO);
+   glfwTerminate();
+
+   return 0;
+}
+
+void processInput(GLFWwindow *window) {
+   if (glfwGetKey(window , GLFW_KEY_ESCAPE) == GLFW_PRESS)
+      glfwSetWindowShouldClose(window , true);
+}
