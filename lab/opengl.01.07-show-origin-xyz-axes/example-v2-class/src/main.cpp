@@ -5,8 +5,20 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 
+// OriginXYZ: Show x, y,z axes 
+// Usage
+/*
+    OriginXYZ *obj = new OriginXYZ();
+
+    while (!glfwWindowShouldClose(window)) {
+        obj->display(); // Render the scene
+        ...
+    }
+
+    delete obj;
+*/
 class OriginXYZ{
-    public:
+    private:
         GLuint shaderProgram;
         GLuint VAO;
         GLuint VBO;
@@ -168,7 +180,6 @@ int main() {
     }
 
     OriginXYZ *obj = new OriginXYZ();
-    // obj->init(); // Initialize OpenGL settings
 
     while (!glfwWindowShouldClose(window)) {
         obj->display(); // Render the scene
@@ -177,9 +188,6 @@ int main() {
         glfwPollEvents(); // Check for events
     }
 
-    // glDeleteVertexArrays(1,&VAO); 
-    // glDeleteBuffers(1,&VBO); 
-    // glDeleteProgram(shaderProgram);
     delete obj;
 
     glfwTerminate(); // Clean up and exit the program
