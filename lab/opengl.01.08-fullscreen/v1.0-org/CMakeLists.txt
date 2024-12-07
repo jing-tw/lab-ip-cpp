@@ -14,6 +14,7 @@ include_directories(${OPENGL_INCLUDE_DIRS}
 add_library(glad 
             ${CMAKE_SOURCE_DIR}/src/glad.c 
             ${CMAKE_SOURCE_DIR}/src/mylib/mylib.cpp
+            ${CMAKE_SOURCE_DIR}/src/mylib/MyFPS.cpp
             ${CMAKE_SOURCE_DIR}/src/mylib/MyPicture.cpp
             )
 

@@ -1,6 +1,3 @@
-#include <iostream> // fps class
-#include <sstream>
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -10,11 +7,32 @@
 
 #include <mylib/mylib.h>
 
+void toggleFullscreen(GLFWwindow* window) {
+    static int width, height;
+    static int xpos, ypos;
+
+    if (glfwGetWindowMonitor(window)) {
+        // Switch to windowed mode
+        glfwGetWindowPos(window, &xpos, &ypos);
+        glfwGetWindowSize(window, &width, &height);
+        glfwSetWindowMonitor(window, NULL, xpos, ypos, width, height, 0);
+    } else {
+        // Switch to fullscreen mode
+        GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+        glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+    }
+}
+
 // Process input function to close the window when ESC is pressed
 void processInput(GLFWwindow *window)
 {
-   if (glfwGetKey(window , GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    if (glfwGetKey(window , GLFW_KEY_ESCAPE) == GLFW_PRESS)
        glfwSetWindowShouldClose(window , true);
+
+    if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
+        toggleFullscreen(window);
+    }
 }
 
 // Framebuffer size callback function to adjust viewport when window is resized
@@ -110,25 +128,4 @@ void OriginXYZ::display(glm::mat4 view, glm::mat4 projection)
     glDrawArrays(GL_LINES, 4, 2);                     // Draw Z axis
 
     glBindVertexArray(0);
-}
-
-FPS::FPS()
-{
-}
-
-void FPS::display()
-{
-    // FPS calculation
-    double currentTime = glfwGetTime();
-    nbFrames++;
-    if (currentTime - lastTime >= 1.0)
-    { // If lastTime is more than 1 sec ago
-        double fps = double(nbFrames) / (currentTime - lastTime);
-        std::stringstream ss;
-        ss << "FPS: " << fps;
-        // glfwSetWindowTitle(window, ss.str().c_str());
-        printf("%s\n", ss.str().c_str());
-        nbFrames = 0;
-        lastTime += 1.0;
-    }
 }
