@@ -1,7 +1,6 @@
 
 #include <glad/glad.h>
 
-
 class MyPicture2{
     private:
         float SCR_WIDTH = -1, SCR_HEIGHT = -1;

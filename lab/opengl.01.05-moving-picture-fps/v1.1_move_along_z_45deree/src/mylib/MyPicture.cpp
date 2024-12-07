@@ -1,5 +1,4 @@
 #include <iostream>
-#include <sstream>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -53,7 +52,7 @@ bool MyPicture2::initVAOBAO(float *vertices, unsigned int size, unsigned int att
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    printf("size = %d\n", size);
+    // printf("size = %d\n", size);
     glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 
     unsigned int total_element = attr1_element_num + attr2_element_num;
@@ -87,7 +86,7 @@ bool MyPicture2::display(float x, float y, float z,  glm::mat4 view, glm::mat4 p
 
     glUseProgram(this->shaderProgram);
 
-    //printf("x = %f, y = %f, z = %f\n", x, y, z );
+    // printf("x = %f, y = %f, z = %f\n", x, y, z );
     // float near = 0.01f;
     // float far = 10.0f;
 

@@ -1,6 +1,3 @@
-#include <iostream> // fps class
-#include <sstream>
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -110,25 +107,4 @@ void OriginXYZ::display(glm::mat4 view, glm::mat4 projection)
     glDrawArrays(GL_LINES, 4, 2);                     // Draw Z axis
 
     glBindVertexArray(0);
-}
-
-FPS::FPS()
-{
-}
-
-void FPS::display()
-{
-    // FPS calculation
-    double currentTime = glfwGetTime();
-    nbFrames++;
-    if (currentTime - lastTime >= 1.0)
-    { // If lastTime is more than 1 sec ago
-        double fps = double(nbFrames) / (currentTime - lastTime);
-        std::stringstream ss;
-        ss << "FPS: " << fps;
-        // glfwSetWindowTitle(window, ss.str().c_str());
-        printf("%s\n", ss.str().c_str());
-        nbFrames = 0;
-        lastTime += 1.0;
-    }
 }

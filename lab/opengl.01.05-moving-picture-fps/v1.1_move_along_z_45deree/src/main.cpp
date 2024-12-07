@@ -5,6 +5,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include <mylib/mylib.h>
+#include <mylib/MyFPS.h>
 #include <mylib/MyPicture.h>
 
 // Settings
@@ -67,7 +68,7 @@ int MovePicture_1()
     myPicture->initVAOBAO(vertices, sizeof(vertices), attr1_element_num, attr2_element_num);
 
     OriginXYZ *obj = new OriginXYZ();
-    FPS objFPS;
+    MyFPS objFPS;
 
     // set the moving    
     float offsetMIN = -5.0f;
@@ -88,8 +89,6 @@ int MovePicture_1()
 
     while (!glfwWindowShouldClose(window))
     {
-    
-        printf("offset = %f, bUP = %d\n", offset, bUP);
         // postion
        if (offset <= offsetMIN && bUP == false){
             bUP = true;
@@ -105,7 +104,6 @@ int MovePicture_1()
             offset -= 0.1f;
         }
 
-        // offset = 0;
         processInput(window); // Input processing
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
@@ -117,7 +115,8 @@ int MovePicture_1()
         glfwSwapBuffers(window); // Swap buffers
         glfwPollEvents();        // Check for events
 
-        objFPS.display(); // display fps
+        double fps = objFPS.display(false); // display fps
+        printf("fps = %f, offset = %f, bUP = %d\n", fps, offset, bUP); 
     }
 
     delete obj;
@@ -158,7 +157,7 @@ int MovePicture_9() {
 
     // create VAO, VBO from vertices
     float d = 0.5f;
-    float z = -5.0f;
+    float z = -0.0f;
     for (int i = 0; i < num; i++){
         myPictures[i] = new MyPicture2(SCR_WIDTH, SCR_HEIGHT);
         // d = d + 0.1f;
@@ -175,7 +174,7 @@ int MovePicture_9() {
          unsigned int attr2_element_num = 2;  // texture
          myPictures[i]->initVAOBAO(vertices, sizeof(vertices), attr1_element_num, attr2_element_num);
     }
-     // setup view & perspective
+    // setup view & perspective
     glm::vec3 cameraPosition = glm::vec3(1.0f, 1.0f, 3.0f); // Set the camera position at (1, 1, 3)
     glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 upVector = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -187,7 +186,7 @@ int MovePicture_9() {
 
 
     OriginXYZ *obj = new OriginXYZ();
-    FPS objFPS;
+    MyFPS objFPS;
 
    float offset = 0.0f; // Moving triangle horizontal offset
    bool bUP = false;
@@ -251,7 +250,10 @@ int MovePicture_9() {
 
        glfwSwapBuffers(window);
        glfwPollEvents();
-       objFPS.display(); // display fps
+
+       // display info
+       double fps = objFPS.display(false); // fps
+       printf("fps = %f, offset = %f, bUP = %d\n", fps, offset, bUP);
    }
 
    // free resource
