@@ -22,7 +22,7 @@ double MyFPS::display(bool bShow)
         fps = double(nbFrames) / (currentTime - lastTime);
         lastFPS = fps;
 
-        if(!bShow){
+        if(bShow){
             std::stringstream ss;
             ss << "FPS: " << fps;
             // glfwSetWindowTitle(window, ss.str().c_str());

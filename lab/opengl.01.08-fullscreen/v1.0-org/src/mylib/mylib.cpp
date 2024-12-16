@@ -1,3 +1,5 @@
+#include <iostream> // debug
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -8,30 +10,26 @@
 #include <mylib/mylib.h>
 
 void toggleFullscreen(GLFWwindow* window) {
-    static int width, height;
-    static int xpos, ypos;
+    static int width = -1, height = -1;
+    static int xpos = -1, ypos = -1;
 
     if (glfwGetWindowMonitor(window)) {
         // Switch to windowed mode
+        if(width != -1 && height != -1){
+            glfwSetWindowMonitor(window, NULL, xpos, ypos, width, height, 0);
+            // printf("Windowed mode: xpos = %d, ypos = %d, height = %d, width = %d \n", xpos, ypos, height, width);
+        }
+    } else {
+        // save original location
         glfwGetWindowPos(window, &xpos, &ypos);
         glfwGetWindowSize(window, &width, &height);
-        glfwSetWindowMonitor(window, NULL, xpos, ypos, width, height, 0);
-    } else {
+        // printf("Save old data: xpos = %d, ypos = %d, height = %d, width = %d \n", xpos, ypos, height, width);
+
         // Switch to fullscreen mode
         GLFWmonitor* monitor = glfwGetPrimaryMonitor();
         const GLFWvidmode* mode = glfwGetVideoMode(monitor);
         glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
-    }
-}
-
-// Process input function to close the window when ESC is pressed
-void processInput(GLFWwindow *window)
-{
-    if (glfwGetKey(window , GLFW_KEY_ESCAPE) == GLFW_PRESS)
-       glfwSetWindowShouldClose(window , true);
-
-    if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
-        toggleFullscreen(window);
+        // printf("Full screen mode: monitor = %p, mode->height = %d, mode->width = %d, mode->refreshRate = %d \n", monitor, mode->height, mode->width, mode->refreshRate);
     }
 }
 
