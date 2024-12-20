@@ -1,16 +1,5 @@
-#include <iostream> // debug
-
-// OpenGL
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-// OpenCV
-#include <opencv2/opencv.hpp>
-
 #include <mylib/mylib.h>
+#include <iostream> // debug
 
 // openGL
 bool toggleFullscreen(GLFWwindow* window) {

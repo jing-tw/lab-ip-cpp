@@ -1,8 +1,9 @@
-// OpenCV
-#include <opencv2/opencv.hpp>
 
 // Bass class
 #include <mylib/MyPicture.h>
+
+
+
 
 // MyPictureCV: CV version 
 // Usage:
@@ -17,8 +18,4 @@ class MyPictureCV: public MyPicture{
     public:
         bool load(const char* path);
         void print();
-        
-    private:
-        // GLuint loadTexture_OpenCV(const char* path, int& width, int& height);
-        GLuint mat2Texture(cv::Mat image);
 };

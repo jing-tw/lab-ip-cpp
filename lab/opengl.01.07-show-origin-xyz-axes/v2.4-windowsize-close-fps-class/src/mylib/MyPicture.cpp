@@ -1,12 +1,6 @@
-#include <iostream>
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 #include <mylib/MyPicture.h>
+#include <iostream>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h" // for load image utility 
@@ -166,6 +160,8 @@ bool MyPicture::initShader()
     // delete the shaders because they are already binded to the procedure
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
+
+    return true;
 }
 
 MyPicture::~MyPicture()

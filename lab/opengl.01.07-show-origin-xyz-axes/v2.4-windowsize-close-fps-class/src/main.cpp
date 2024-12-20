@@ -1,6 +1,3 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 #include <iostream>
 #include <mylib/mylib.h>
 #include <mylib/MyCordXYZ.h>
@@ -18,9 +15,6 @@ int main(){
     int ret = MovePicture_1();
     return ret;
 }
-
-
-
 
 int MovePicture_1()
 {

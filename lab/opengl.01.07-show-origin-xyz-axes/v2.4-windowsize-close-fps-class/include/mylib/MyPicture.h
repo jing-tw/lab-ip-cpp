@@ -1,5 +1,7 @@
 
+// OpenGL
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -34,7 +36,7 @@ class MyPicture{
 
     protected:
         bool initVertics();
-        bool initShader();
+        virtual bool initShader();
     
     private:
         bool initVAOBAO(float *vertices, unsigned int size, unsigned int attr1_element_num, unsigned int attr2_element_num);
