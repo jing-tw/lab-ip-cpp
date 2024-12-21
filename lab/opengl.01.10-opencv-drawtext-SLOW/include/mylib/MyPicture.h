@@ -9,11 +9,19 @@
 // MyPicture: stb_image version 
 // Usage:
 /*
-    MyPicture *myPicture = new MyPicture();
-    myPicture->load("cs-black-000.png");
-    while(1){
-        myPicture->display(0.0f, 0.0f, offset, view, projection);
-    }
+    // Show Picture
+    	MyPicture *myPicture = new MyPicture();
+    	myPicture->load("cs-black-000.png");
+    	while(1){
+     	   myPicture->display(0.0f, 0.0f, offset, view, projection);
+    	}
+*/
+
+/*
+    // Draw text (SLOW)
+        Point org(myPicture->width/2, myPicture->height/2);
+        Scalar color(255, 255, 0); // Set color (BGR format)
+        ((MyPictureCV*) myPicture)->drawText_SLOW(ss.str().c_str(), org, color);q
 */
 class MyPicture{
     public:
