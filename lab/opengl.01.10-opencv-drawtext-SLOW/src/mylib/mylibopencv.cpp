@@ -7,7 +7,8 @@ bool drawText(Mat &image, const char *text, Point org, Scalar color, double font
     return true;
 }
 
-bool test_drawText(Mat &image, const char *text, Point org, Scalar color){
+
+bool drawText(Mat &image, const char *text, Point org, Scalar color){
     // Define the text to be displayed
     // std::string text = "Hello, OpenCV!";
     
@@ -27,4 +28,6 @@ bool test_drawText(Mat &image, const char *text, Point org, Scalar color){
     // Put text on the image
     // putText(image, text, position, fontFace, fontScale, color, thickness);
     putText(image, text, org, fontFace, fontScale, color, thickness);
+
+    return true;
 }

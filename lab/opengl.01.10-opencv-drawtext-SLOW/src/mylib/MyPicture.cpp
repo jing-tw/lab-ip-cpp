@@ -44,8 +44,6 @@ bool MyPicture::load(const char *path)
     this->texture = loadTexture(path, width, height); // chage to your PNG path
     if (this->texture == 0)
         return false;
-
-    // initShader();
     return true;
 }
 

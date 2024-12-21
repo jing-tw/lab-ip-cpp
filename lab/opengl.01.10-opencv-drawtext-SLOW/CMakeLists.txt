@@ -32,10 +32,10 @@ add_library(MyStaticLib STATIC
             ${CMAKE_SOURCE_DIR}/src/mylib/mylibopencv.cpp
             )
 
-add_executable(OpenGLDemo src/main.cpp)
+add_executable(demo src/main.cpp)
 
-target_link_libraries(OpenGLDemo 
+target_link_libraries(demo 
                         ${OPENGL_LIBRARIES} 
                         ${OpenCV_LIBS} 
                         glfw MyStaticLib dl)
-target_include_directories(OpenGLDemo PRIVATE ${GLM_INCLUDE_DIRS})
+target_include_directories(demo PRIVATE ${GLM_INCLUDE_DIRS})

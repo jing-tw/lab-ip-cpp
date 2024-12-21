@@ -44,17 +44,9 @@ bool MyPictureCV::load(const char *path)
 // 應該要在同一塊畫布上,顯示完所有文字, 然後再一次產生texture
 void MyPictureCV::drawText_SLOW(const char *text, Point org, Scalar color){
     cv::Mat image_flip = image.clone();
-    test_drawText(image_flip, text, org, color);
-
+    drawText(image_flip, text, org, color);
 
     // update the texture
     glDeleteTextures(1, &this->texture); // Delete the texture
     this->texture = mat2Texture(image_flip, true);
 }
-
-
-
-// void MyPictureCV::updateTexture(Mat ){
-
-// }
-

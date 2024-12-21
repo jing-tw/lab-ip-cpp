@@ -48,7 +48,8 @@ int MovePicture_1()
 
     MyPicture *myPicture = new MyPictureCV();
     // MyPicture *myPicture = new MyPicture();
-    myPicture->load("cs-black-000.png");
+    if (!myPicture->load("cs-black-000.png"))
+        return 0;
     
     
     MyCordXYZ *obj = new MyCordXYZ();
@@ -94,7 +95,7 @@ int MovePicture_1()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
         
         
-        myPicture->display(0.0f, 0.0f, offset, view, projection);
+        
 
         double fps = objFPS.display(false); // display fps
         std::stringstream ss;
@@ -105,6 +106,7 @@ int MovePicture_1()
         Scalar color(255, 255, 0); // Set color (BGR format)
         ((MyPictureCV*) myPicture)->drawText_SLOW(ss.str().c_str(), org, color);
 
+        myPicture->display(0.0f, 0.0f, offset, view, projection);
         obj->display(view, projection); // Render the scene
 
         glfwSwapBuffers(window); // Swap buffers
