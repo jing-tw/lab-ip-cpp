@@ -1,4 +1,16 @@
 #!/bin/bash
+
+function my_make(){
+    set -e     # stop script and exit the terminal when got any error
+    set -x 
+    pushd bin 
+    make clean
+    make
+    popd
+    set +e
+    set +x 
+}
+
 function build(){
     set -e     # stop script and exit the terminal when got any error
     set -x 
