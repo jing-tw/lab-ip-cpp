@@ -1,3 +1,28 @@
+# Init
+## Start X server
+```
+launch MobaXterm
+```
+## X forwarding
+```
+export DISPLAY=local_host_ip:Xserver port
+e.g.
+export DISPLAY=192.168.56.1:0.0
+```
+
+# Build & Clean & Run
+## Quick
+```
+./build.sh && ./bin/demo
+```
+
+## Detail
+```
+./build.sh  # build
+./clean.sh  # clean
+./bin/demo # run
+```
+
 # Commit Naming Rules
 Establishing a clear and consistent commit naming convention is crucial for maintaining a readable and manageable codebase. Here are the key rules and best practices for crafting effective commit messages:
 
@@ -28,3 +53,6 @@ Utilize specific types to categorize commits, which aids in understanding the na
 ## Writing Style
 Use the imperative mood for the subject line, framing it as a command (e.g., "fix bug" instead of "fixed bug").
 Be concise and clear, focusing on what was done and why, rather than how it was accomplished.
+
+# Reference
+1. https://www.conventionalcommits.org/en/v1.0.0/
