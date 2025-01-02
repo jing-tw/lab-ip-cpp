@@ -1,8 +1,5 @@
-// #include <vector>
-#include <Eigen/Dense>
+// #include <Eigen/Dense>
 #include <mylib/kalman.h>
-
-
 
 KalmanFilter::KalmanFilter(
     double dt,
