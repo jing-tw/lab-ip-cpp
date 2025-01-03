@@ -28,6 +28,7 @@ FetchContent_Declare(
   GIT_TAG 3.4.0  # You can specify the version you need
 )
 FetchContent_MakeAvailable(eigen)
+unset(BUILD_TESTING CACHE)
 
 # add_library(mylib STATIC 
 #             # OpenGL
