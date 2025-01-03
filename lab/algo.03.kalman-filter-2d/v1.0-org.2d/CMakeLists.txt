@@ -22,6 +22,7 @@ FetchContent_Declare(
   GIT_TAG 3.4.0 
 )
 FetchContent_MakeAvailable(eigen)
+unset(BUILD_TESTING CACHE)  #do not do test
 
 # for the path of #include <Eigen/Dense>
 set(EIGEN_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/bin/_deps/eigen-src)
