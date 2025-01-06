@@ -4,6 +4,13 @@ project(MyDemo)
 
 add_definitions(-D__MYDEBUG__)
 
+# Variable
+# cmake -DUSER_DEFINED_BUILD_DIRECTORY=build
+if(NOT DEFINED USER_DEFINED_BUILD_DIRECTORY)
+    set(USER_DEFINED_BUILD_DIRECTORY "build")
+endif()
+message(STATUS "USER_DEFINED_BUILD_DIRECTORY: ${USER_DEFINED_BUILD_DIRECTORY}")
+
 # Base
 include_directories(${CMAKE_SOURCE_DIR}/include) 
 
@@ -26,7 +33,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(eigen)
 unset(BUILD_TESTING CACHE)
 
-set(EIGEN_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/bin/_deps/eigen-src)
+set(EIGEN_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/${USER_DEFINED_BUILD_DIRECTORY}/_deps/eigen-src)
 if(NOT EXISTS "${EIGEN_INCLUDE_DIR}")
     message(FATAL_ERROR "Please point EIGEN_INCLUDE_DIR to the include directory of your Eigen installation.")
 endif()
