@@ -1,9 +1,18 @@
 #!/bin/bash
 
 function my_make(){
+    local out="build"
+    if [ "$#" -lt 1 ]; then
+        printf 'my_make:: use default value\n'
+    else    
+        out=$1
+    fi
+    print 'my_make:: out = %s\n' "${out}"
+
     set -e     # stop script and exit the terminal when got any error
     set -x 
-    pushd bin 
+    # pushd bin 
+    pushd "${out}"
     make clean
     make
     popd
@@ -12,13 +21,22 @@ function my_make(){
 }
 
 function build(){
+    local out="build"
+    if [ "$#" -lt 1 ]; then
+        printf 'build:: use default value\n'
+    else    
+        out=$1
+    fi
+    print 'build:: out = %s\n' "${out}"
+
     set -e     # stop script and exit the terminal when got any error
     set -x 
     local PROJECT_PATH=`realpath ./`
+
     
-    mkdir bin
-    pushd bin
-    cmake .. && make
+    mkdir "${out}"
+    pushd "${out}"
+    cmake -DUSER_DEFINED_BUILD_DIRECTORY="${out}" .. && make
 
     popd
     set +e
@@ -26,12 +44,20 @@ function build(){
 }
 
 function clean(){
+    local out="build"
+    if [ "$#" -lt 1 ]; then
+        printf 'clean:: use default value\n'
+    else    
+        out=$1
+    fi
+    print 'clean:: out = %s\n' "${out}"
+
     set -e     # stop script and exit the terminal when got any error
     set -x 
     local PROJECT_PATH=`realpath ./`
 
     echo "Remove folders"
-    rm -fr ./bin
+    rm -fr ./"${out}"
 
     set +e
     set +x 
