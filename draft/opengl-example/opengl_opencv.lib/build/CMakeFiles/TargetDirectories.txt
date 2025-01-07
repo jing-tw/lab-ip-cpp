@@ -1,0 +1,3 @@
+/home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/build/CMakeFiles/myopengl_opencv.dir
+/home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/build/CMakeFiles/edit_cache.dir
+/home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/build/CMakeFiles/rebuild_cache.dir
