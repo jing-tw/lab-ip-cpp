@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(myopengl)
+project(myopengl VERSION 1.0.0 LANGUAGES CXX)
 
 add_definitions(-D__MYDEBUG__)
 
@@ -11,12 +11,11 @@ add_definitions(-D__MYDEBUG__)
 # endif()
 # message(STATUS "USER_DEFINED_BUILD_DIRECTORY: ${USER_DEFINED_BUILD_DIRECTORY}")
 
+
+message(STATUS "Project Version: ${PROJECT_VERSION}")
+
 # Base
 include_directories(${CMAKE_SOURCE_DIR}/include) 
-
-# # OpenCV
-# find_package(OpenCV REQUIRED)
-# include_directories(${OpenCV_INCLUDE_DIRS})
 
 # OpenGL
 find_package(OpenGL REQUIRED)
@@ -25,32 +24,22 @@ find_package(glm REQUIRED)
 
 include_directories(${OPENGL_INCLUDE_DIRS}
                     ${GLFW_INCLUDE_DIRS}
-                    #${CMAKE_SOURCE_DIR}/include
 ) 
 
 add_library(${PROJECT_NAME} SHARED 
-            # OpenGL
-            ${CMAKE_SOURCE_DIR}/src/glad.c 
-
             # MyLib (OpenGL)
             ${CMAKE_SOURCE_DIR}/src/mylib/mylibopengl.cpp
             ${CMAKE_SOURCE_DIR}/src/mylib/MyCordXYZ.cpp
             ${CMAKE_SOURCE_DIR}/src/mylib/MyFPS.cpp
             ${CMAKE_SOURCE_DIR}/src/mylib/MyPicture.cpp
-            
-
-            # # MyLib (OpenCV)
-            # ${CMAKE_SOURCE_DIR}/src/mylib/mylibopencv.cpp
-
-            # # MyLib (OpenCV + OpenGL)
-            # ${CMAKE_SOURCE_DIR}/src/mylib/mylibopengl_opencv.cpp
-            # ${CMAKE_SOURCE_DIR}/src/mylib/MyPictureCV.cpp
-
-
             )
 
 target_link_libraries(${PROJECT_NAME} 
             ${OPENGL_LIBRARIES} 
-            # ${OpenCV_LIBS} 
             )
 
+# Set the version for the library
+set_target_properties(${PROJECT_NAME}  PROPERTIES 
+                        VERSION ${PROJECT_VERSION}
+                        SOVERSION ${PROJECT_VERSION_MAJOR}
+                        )

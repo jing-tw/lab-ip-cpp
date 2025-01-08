@@ -15,7 +15,7 @@ function build_library(){
     popd
     
     pushd opengl_opencv.lib
-    ../clean.sh && ./build.sh && ./deploy.sh
+    ./clean.sh && ./build.sh && ./deploy.sh
     popd
 }
 

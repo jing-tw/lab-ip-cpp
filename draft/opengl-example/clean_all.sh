@@ -21,9 +21,11 @@ function clean_library(){
 
 function clean_test(){
     pushd test
-    ./clean.sh
+    ./clean.sh   # clean binary
+    rm *.so*  # clean all deployed shared library
     popd
 }
+
 
 
 main

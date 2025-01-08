@@ -21,7 +21,8 @@ include_directories(${OPENGL_INCLUDE_DIRS}
                     ${GLFW_INCLUDE_DIRS}
                     ${CMAKE_SOURCE_DIR}/include) 
 
-add_executable(${PROJECT_NAME}  src/main.cpp)
+add_executable(${PROJECT_NAME}  src/main.cpp 
+                src/glad.c)
 
 target_link_libraries(${PROJECT_NAME}  
                     ${OPENGL_LIBRARIES} 

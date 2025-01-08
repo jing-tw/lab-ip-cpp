@@ -14,7 +14,7 @@ function main(){
     
     if test -d ${target}; then
         printf "copy to *.sh to the ${target}.\n"
-        cp ${build}/*.so ${target}
+        cp ${build}/*.so* ${target}
     else
         printf "${target} does not exist.\n"
         return -1

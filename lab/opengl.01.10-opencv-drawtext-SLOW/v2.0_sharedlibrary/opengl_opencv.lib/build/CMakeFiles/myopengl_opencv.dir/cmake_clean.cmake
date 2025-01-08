@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o.d"
   "libmyopengl_opencv.pdb"
   "libmyopengl_opencv.so"
+  "libmyopengl_opencv.so.1"
+  "libmyopengl_opencv.so.1.0.0"
 )
 
 # Per-language clean rules from dependency scanning.

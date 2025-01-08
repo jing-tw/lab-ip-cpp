@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(myopengl_opencv)
+project(myopengl_opencv VERSION 1.0.0 LANGUAGES CXX)
 
 add_definitions(-D__MYDEBUG__)
 
@@ -42,3 +42,8 @@ target_link_libraries(${PROJECT_NAME}
             ${CMAKE_SOURCE_DIR}/libmyopencv.so   # because DrawText in the lib myopencv.
             )
 
+# Set the version for the library
+set_target_properties(${PROJECT_NAME}  PROPERTIES 
+                        VERSION ${PROJECT_VERSION}
+                        SOVERSION ${PROJECT_VERSION_MAJOR}
+                        )
