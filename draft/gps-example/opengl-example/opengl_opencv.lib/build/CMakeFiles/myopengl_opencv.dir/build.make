@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib
+CMAKE_SOURCE_DIR = /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/build
+CMAKE_BINARY_DIR = /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/myopengl_opencv.dir/depend.make
@@ -72,30 +72,30 @@ include CMakeFiles/myopengl_opencv.dir/flags.make
 CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o: CMakeFiles/myopengl_opencv.dir/flags.make
 CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o: ../src/mylib/mylibopengl_opencv.cpp
 CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o: CMakeFiles/myopengl_opencv.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o -MF CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o.d -o CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o -c /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/src/mylib/mylibopengl_opencv.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o -MF CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o.d -o CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o -c /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/src/mylib/mylibopengl_opencv.cpp
 
 CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/src/mylib/mylibopengl_opencv.cpp > CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/src/mylib/mylibopengl_opencv.cpp > CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.i
 
 CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/src/mylib/mylibopengl_opencv.cpp -o CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/src/mylib/mylibopengl_opencv.cpp -o CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.s
 
 CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o: CMakeFiles/myopengl_opencv.dir/flags.make
 CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o: ../src/mylib/MyPictureCV.cpp
 CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o: CMakeFiles/myopengl_opencv.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o -MF CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o.d -o CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o -c /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/src/mylib/MyPictureCV.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o -MF CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o.d -o CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o -c /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/src/mylib/MyPictureCV.cpp
 
 CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/src/mylib/MyPictureCV.cpp > CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/src/mylib/MyPictureCV.cpp > CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.i
 
 CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/src/mylib/MyPictureCV.cpp -o CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/src/mylib/MyPictureCV.cpp -o CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.s
 
 # Object files for target myopengl_opencv
 myopengl_opencv_OBJECTS = \
@@ -159,7 +159,7 @@ libmyopengl_opencv.so.1.0.0: /usr/local/lib/libopencv_photo.so.4.1.0
 libmyopengl_opencv.so.1.0.0: /usr/local/lib/libopencv_imgproc.so.4.1.0
 libmyopengl_opencv.so.1.0.0: /usr/local/lib/libopencv_core.so.4.1.0
 libmyopengl_opencv.so.1.0.0: CMakeFiles/myopengl_opencv.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX shared library libmyopengl_opencv.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX shared library libmyopengl_opencv.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/myopengl_opencv.dir/link.txt --verbose=$(VERBOSE)
 	$(CMAKE_COMMAND) -E cmake_symlink_library libmyopengl_opencv.so.1.0.0 libmyopengl_opencv.so.1 libmyopengl_opencv.so
 
@@ -178,6 +178,6 @@ CMakeFiles/myopengl_opencv.dir/clean:
 .PHONY : CMakeFiles/myopengl_opencv.dir/clean
 
 CMakeFiles/myopengl_opencv.dir/depend:
-	cd /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/build /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/build /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/build/CMakeFiles/myopengl_opencv.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/build /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/build /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/build/CMakeFiles/myopengl_opencv.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/myopengl_opencv.dir/depend
 

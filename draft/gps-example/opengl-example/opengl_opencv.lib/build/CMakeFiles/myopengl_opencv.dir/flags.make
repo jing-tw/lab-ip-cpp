@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -D__MYDEBUG__ -Dmyopengl_opencv_EXPORTS
 
-CXX_INCLUDES = -I/home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/include -I/home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/                    -isystem /usr/local/include/opencv4
+CXX_INCLUDES = -I/home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/include -I/home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/                    -isystem /usr/local/include/opencv4
 
 CXX_FLAGS = -fPIC
 

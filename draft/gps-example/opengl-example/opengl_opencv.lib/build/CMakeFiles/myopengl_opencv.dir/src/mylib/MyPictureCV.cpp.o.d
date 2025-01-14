@@ -1,10 +1,10 @@
 CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o: \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/src/mylib/MyPictureCV.cpp \
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/src/mylib/MyPictureCV.cpp \
  /usr/include/stdc-predef.h \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/include/mylib/MyPictureCV.h \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/include/mylib/MyPicture.h \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/include/glad/glad.h \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/include/KHR/khrplatform.h \
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/include/mylib/MyPictureCV.h \
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/include/mylib/MyPicture.h \
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/include/glad/glad.h \
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -540,6 +540,6 @@ CMakeFiles/myopengl_opencv.dir/src/mylib/MyPictureCV.cpp.o: \
  /usr/local/include/opencv4/opencv2/videostab/deblurring.hpp \
  /usr/local/include/opencv4/opencv2/videostab/wobble_suppression.hpp \
  /usr/local/include/opencv4/opencv2/videostab/ring_buffer.hpp \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/include/mylib/mylibopencv.h \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/include/mylib/mylibopengl_opencv.h \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/include/mylib/mylibopengl.h
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/include/mylib/mylibopencv.h \
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/include/mylib/mylibopengl_opencv.h \
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/include/mylib/mylibopengl.h

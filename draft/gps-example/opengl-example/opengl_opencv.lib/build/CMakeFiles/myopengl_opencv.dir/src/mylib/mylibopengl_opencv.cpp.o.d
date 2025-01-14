@@ -1,9 +1,9 @@
 CMakeFiles/myopengl_opencv.dir/src/mylib/mylibopengl_opencv.cpp.o: \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/src/mylib/mylibopengl_opencv.cpp \
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/src/mylib/mylibopengl_opencv.cpp \
  /usr/include/stdc-predef.h \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/include/mylib/mylibopengl_opencv.h \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/include/glad/glad.h \
- /home/jing/test/lab-ip-cpp/draft/opengl-example/opengl_opencv.lib/include/KHR/khrplatform.h \
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/include/mylib/mylibopengl_opencv.h \
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/include/glad/glad.h \
+ /home/jing/test/lab-ip-cpp/draft/gps-example/opengl-example/opengl_opencv.lib/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
