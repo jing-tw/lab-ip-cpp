@@ -20,6 +20,7 @@ class MyPictureCV: public MyPicture{
         Mat image;
 
     public:
+        MyPictureCV(float d=0.5f, float z=0.0f);
         bool load(const char* path);
         void print();
         void drawText_SLOW(const char *text, Point org, Scalar color);

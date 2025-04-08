@@ -28,7 +28,8 @@ private:
     static const int Vertex_Attribute1_COMPONENT_NUM = 3;                                                                       // x, y, z
     static const int Vertex_Attribute2_COMPONENT_NUM = 0;                                                                       // no texture location
     static const int Vertex_Attribute1_COMPONENT_TOTAL_NUM = Vertex_Attribute1_COMPONENT_NUM + Vertex_Attribute2_COMPONENT_NUM; // one  vector size = 3 + 0
-    GLfloat vertices[VertexToalNUM * Vertex_Attribute1_COMPONENT_TOTAL_NUM] = {
+    static const int Vertex_Array_Length = VertexToalNUM * Vertex_Attribute1_COMPONENT_TOTAL_NUM;
+    GLfloat vertices[Vertex_Array_Length] = {
         // X axis
         -1.0f, 0.0f, 0.0f,
          1.0f, 0.0f, 0.0f,
@@ -58,10 +59,10 @@ private:
             )";
 
 public:
-    MyCordXYZ();
+    MyCordXYZ(GLfloat* vertices=NULL, int length=0);
     void display(glm::mat4 view, glm::mat4 projection);
     ~MyCordXYZ();
 
 private:
-    void init();
+    void init(GLfloat *vertices, int length);
 };

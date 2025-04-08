@@ -1,8 +1,14 @@
+// #include <iostream> // for debug msg
 #include <mylib/MyCordXYZ.h>
 
-MyCordXYZ::MyCordXYZ()
+
+MyCordXYZ::MyCordXYZ(GLfloat *vertices, int length)
 {
-    init();
+    if (vertices != NULL){
+        init(vertices, length);
+    }else{
+        init(this->vertices, this->Vertex_Array_Length);
+    }
 }
 
 MyCordXYZ::~MyCordXYZ()
@@ -13,19 +19,16 @@ MyCordXYZ::~MyCordXYZ()
 }
 
 // Initialize OpenGL settings
-void MyCordXYZ::init()
+void MyCordXYZ::init(GLfloat *vertices, int length)
 {
     // Create VAO and VBO
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
 
     glBindVertexArray(VAO);
-
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, length * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
 
-    // init attribute 1: (x, y, z)
-    // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
     glVertexAttribPointer(0, Vertex_Attribute1_COMPONENT_NUM, GL_FLOAT, GL_FALSE, Vertex_Attribute1_COMPONENT_TOTAL_NUM * sizeof(GLfloat), (GLvoid *)0);
     glEnableVertexAttribArray(0);
 
