@@ -5,8 +5,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h" // for load image utility 
 
-MyPicture::MyPicture(){
-    this->initVertics();
+MyPicture::MyPicture(float d, float z){
+    this->initVertics(d, z);
     this->initShader();
 }
 
@@ -19,9 +19,9 @@ void MyPicture::print(){
 
 
 // init opengl vertics
-bool MyPicture::initVertics(){
-    float d = 0.5f;
-    float z = -0.0f;
+bool MyPicture::initVertics(float d, float z){
+    // float d = 0.5f;
+    // float z = -0.0f;
     float vertices[] = { // Format: positions, texture coords
             d,  d, z,     1.0f, 1.0f,   // top right
             d, -d, z,     1.0f, 0.0f,   // bottom right

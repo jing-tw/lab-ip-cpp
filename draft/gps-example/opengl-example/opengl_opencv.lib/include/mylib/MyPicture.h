@@ -34,14 +34,14 @@ class MyPicture{
         GLuint VAO, VBO;
 
     public:
-        MyPicture();
+        MyPicture(float d = 0.5f, float z=0.0f);
         ~MyPicture();
         virtual bool load(const char* path);
         virtual bool display(float x, float y, float z,  glm::mat4 view, glm::mat4 projection);
         virtual void print();
 
     protected:
-        bool initVertics();
+        bool initVertics(float d, float z);
         virtual bool initShader();
     
     private:

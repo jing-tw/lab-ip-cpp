@@ -14,6 +14,10 @@
 // Mylib
 #include <mylib/mylibopengl.h> 
 
+MyPictureCV::MyPictureCV(float d, float z):MyPicture(d, z){
+
+}
+
 void MyPictureCV::print() {
     #ifdef __MYDEBUG__
     printf("[__MYDEBUG__] class name = %s\n", "MyPictureCV");
