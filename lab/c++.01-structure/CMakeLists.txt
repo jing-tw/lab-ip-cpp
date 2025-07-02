@@ -14,6 +14,7 @@ set(INC_DIR include)
 # include_directories(${OpenCV_INCLUDE_DIRS})
 
 # Source files
+include_directories(${INC_DIR})
 file(GLOB SRC_FILES ${SRC_DIR}/main.cpp 
                     )
 
